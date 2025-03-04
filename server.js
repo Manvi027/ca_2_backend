@@ -4,6 +4,10 @@ const app = express();
 
 app.use(express.json());
 
+const users = [
+    {email : 'manvi@gmail.com',password = '1234'},
+];
+
 const port = 8080;
 
 
@@ -11,13 +15,25 @@ app.get('/' ,(req,res) => {
     res.send('Hi , user!!');
 })
 
-app.put('/user',(req,res)=>{
+app.put('/user',async(req,res)=>{
     try{
-        const {email,password} = req.body;
 
-        if (email){
-            const update = await
+        const {email,password} = req.body;
+        for(let key in users){
+            if(users[key].email==email){
+                users[key]={...users[key],...update};
+                update =true;
+                return res.send.status(200).json({
+                    msg : 'user data updated',
+                    success : true
+                })
+                
+            }
+            else {
+                return res.status()
+            }
         }
+
 
         if (!email){
             res.status(400).json({
@@ -36,8 +52,15 @@ app.put('/user',(req,res)=>{
 })
 
 app.get('/delete',async(req,res)=>{
-    const email = req.body;
-    const del=await users
+    try{
+        const {email} = req.body;
+        if(email){
+            
+        }
+        const del=await users
+    }
+    
+   
 })
 
 app.listen(port , () => {
